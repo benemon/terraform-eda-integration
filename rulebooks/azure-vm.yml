@@ -10,7 +10,7 @@
 
   rules:
     - name: here is my specific rule match for a particular message
-      condition: event.payload.eventType == "Microsoft.Resources.ResourceWriteSuccess"
+      condition: event.payload is defined
       action:
         debug:
           msg: "Ansible is cool"
