@@ -7,3 +7,10 @@
       ansible.eda.azure_service_bus:
         conn_str: "{{ connection_string }}"
         queue_name: "events"
+
+  rules:
+    - name: here is my specific rule match for a particular message
+      condition: event.payload.eventType == "Microsoft.Resources.ResourceWriteSuccess"
+      action:
+        debug:
+          msg: "Ansible is cool"
