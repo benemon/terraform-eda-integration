@@ -1,0 +1,18 @@
+---
+- name: listen for azure events
+  hosts: all
+
+  sources:
+    - name: webhook from tfc
+      ansible.eda.webhook:
+        host: 0.0.0.0
+        port: 5000
+      filters:
+       - ansible.eda.normalize_keys:
+
+  rules:
+    - name: here is my specific rule match for a particular message
+      condition: event.payload is defined
+      action:
+        debug:
+          msg: "Ansible is cool"
