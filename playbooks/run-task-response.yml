@@ -2,8 +2,9 @@
 - hosts: all
   gather_facts: true
   tasks:
-  - name: see all facts
+  - name: see extra_vars
     ansible.builtin.debug:
-      var: ansible_facts
+      - var: access_token
+      - var: task_result_callback_url
 
 
