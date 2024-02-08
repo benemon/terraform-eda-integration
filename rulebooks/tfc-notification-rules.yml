@@ -20,3 +20,9 @@
       action:
         debug:
           msg: "TFC run is planning"
+
+    - name: catchall status rule
+      condition: event.payload.notifications is defined
+      action:
+        debug:
+          var: "{{ event | to_nice_json }}"
