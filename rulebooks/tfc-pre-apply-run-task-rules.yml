@@ -11,6 +11,8 @@
   rules:
     - name: pre-apply status rule
       condition: event.payload.stage == "pre_apply"
-      action:
-        print_event:
-          pretty: true
+      actions:
+        - print_event:
+           pretty: true
+        - run_playbook:
+            name: ../playbooks/run-task-response.yml

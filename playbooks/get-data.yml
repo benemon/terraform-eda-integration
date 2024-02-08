@@ -2,7 +2,7 @@
 - hosts: localhost
   gather_facts: true
   vars:
-    event:  "{{lookup('file','pending.json')}}"
+    event:  "{{lookup('file','data/test-run-task.json')}}"
   tasks:
   - name: get the thing
     ansible.builtin.set_fact:
