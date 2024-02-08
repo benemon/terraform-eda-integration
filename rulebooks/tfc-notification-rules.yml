@@ -32,7 +32,6 @@
       actions:
         debug:
           msg: "TFC run is applied"
-
         run_job_template:
           name: Demo Job Template
           organization: Default
