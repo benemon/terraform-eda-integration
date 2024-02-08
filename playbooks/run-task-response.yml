@@ -1,6 +1,6 @@
 ---
 - hosts: all
-  gather_facts: true
+  gather_facts: false
   tasks:
   - name: see extra_vars
     ansible.builtin.debug:

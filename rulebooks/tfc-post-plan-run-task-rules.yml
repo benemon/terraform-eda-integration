@@ -18,6 +18,6 @@
             organization: Default
             job_args:
               extra_vars:
-                access_token: event.payload.access_token
-                task_result_callback_url: event.task_result_callback_url
+                access_token: "hello"
+                task_result_callback_url: "goodbye"
               
