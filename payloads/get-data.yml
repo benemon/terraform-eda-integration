@@ -1,0 +1,20 @@
+---
+- hosts: localhost
+  gather_facts: true
+  vars:
+    event:  "{{lookup('file','pending.json')}}"
+  tasks:
+  - name: get the thing
+    ansible.builtin.set_fact:
+      notifications: "{{ event.payload.notifications }}"
+
+  - name: print the thing
+    ansible.builtin.debug:
+        #msg: "{{ notifications | json_query('[?run_status==`pending`]')}}"
+        msg:
+         - "{{ notifications }}" 
+         - "{{ notifications | json_query('[*].run_status' | equals(\"pending\"))}}"
+
+        
+
+  

@@ -10,13 +10,13 @@
 
   rules:
     - name: pending status rule
-      condition: event.payload.notifications["run_status"] == "pending"
+      condition: event.payload.notifications[0].run_status == "pending"
       action:
         debug:
           msg: "TFC run is pending"
 
     - name: planning status rule
-      condition: event.payload.notifications["run_status"] == "planning"
+      condition: event.payload.notifications[0].run_status == "planning"
       action:
         debug:
           msg: "TFC run is planning"
