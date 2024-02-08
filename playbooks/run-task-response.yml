@@ -1,7 +1,6 @@
 ---
-- hosts: localhost
+- hosts: all
   gather_facts: true
-  connection: local
   tasks:
   - name: see all facts
     ansible.builtin.debug:
