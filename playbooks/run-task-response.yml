@@ -13,9 +13,20 @@
       - "{{ access_token }}"
       - "{{ task_result_callback_url }}"
 
- - name: send run task response
-   ansible.builtin.uri:
-    url: "{{ task_result_callback_url }}"
+  - name: send run task response
+    ansible.builtin.uri:
+      url: "{{ task_result_callback_url }}"
+      method: POST
+      headers:
+        Content-Type: application/vnd.api+json
+        Authorization: "Bearer {{ access_token }}"
+      body:
+        data:
+          type: task-results
+          attributes:
+            status: passed
+            message: successfully called aap job based on eda event from a run task
+            url: "{{ awx_job_id }}"
 
 
 
