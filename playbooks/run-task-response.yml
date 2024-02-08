@@ -4,7 +4,8 @@
   tasks:
   - name: see extra_vars
     ansible.builtin.debug:
-      - var: access_token
-      - var: task_result_callback_url
+      msg: 
+      - "{{ access_token }}"
+      - "{{ task_result_callback_url }}"
 
 
