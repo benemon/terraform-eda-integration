@@ -30,11 +30,11 @@
     - name: applied status rule
       condition: event.payload.notifications[0].run_status == "applied"
       actions:
-        debug:
-          msg: "TFC run is applied"
-        run_job_template:
-          name: Demo Job Template
-          organization: Default
+        - debug:
+            msg: "TFC run is applied"
+        - run_job_template:
+            name: Demo Job Template
+            organization: Default
 
     - name: catchall status rule
       condition: event.payload.notifications[0].run_status not in ["pending", "planning", "applying", "applied"]
