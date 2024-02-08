@@ -1,0 +1,16 @@
+---
+- name: listen for tfc pre apply run task events
+  hosts: all
+
+  sources:
+    - name: tfc run task webhook
+      ansible.eda.webhook:
+        host: 0.0.0.0
+        port: 5000
+        hmac_secret: "{{ hmac }}"
+
+    - name: pre-apply status rule
+      condition: event.payload.stage == "pre_apply"
+      action:
+        print_event:
+          pretty: true
