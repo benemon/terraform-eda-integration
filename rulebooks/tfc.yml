@@ -1,15 +1,15 @@
 ---
-- name: listen for azure events
+- name: listen for tfc events
   hosts: all
 
   sources:
-    - name: webhook from tfc
+    - name: tfc notifications webhook
       ansible.eda.webhook:
         host: 0.0.0.0
         port: 5000
 
   rules:
-    - name: pending status
+    - name: pending status rule
       condition: event.payload.notifications.run_status == "pending"
       action:
         debug:
