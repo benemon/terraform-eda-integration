@@ -1,7 +1,6 @@
 ---
 - name: listen for tfc pre apply run task events
   hosts: all
-
   sources:
     - name: tfc run task webhook
       ansible.eda.webhook:
@@ -14,5 +13,6 @@
       actions:
         - print_event:
            pretty: true
-        - run_playbook:
-            name: ../playbooks/run-task-response.yml
+        - run_job_template:
+            name: Run Task Response
+            organization: Default
