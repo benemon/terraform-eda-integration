@@ -5,12 +5,17 @@
   - name: set facts from event data
     ansible.builtin.set_fact:
       access_token: "{{ ansible_eda.event.payload.access_token }}"
-      task_result_callback_url: "{{ ansible_eda.event.task_result_callback_url }}"
+      task_result_callback_url: "{{ ansible_eda.event.payload.task_result_callback_url }}"
 
   - name: output callback details
     ansible.builtin.debug:
       msg: 
       - "{{ access_token }}"
       - "{{ task_result_callback_url }}"
+
+ - name: send run task response
+   ansible.builtin.uri:
+    url: "{{ task_result_callback_url }}"
+
 
 
