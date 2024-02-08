@@ -22,7 +22,7 @@
           msg: "TFC run is planning"
 
     - name: catchall status rule
-      condition: event.payload.notifications[0].run_status is defined
+      condition: event.payload.notifications[0].run_status not in ["pending", "planning"]
       action:
-        debug:
-          var: "{{ event | to_nice_json }}"
+        print_event:
+          pretty: true
