@@ -8,8 +8,8 @@
         port: 5000
 
   rules:
-    - name: pre-apply status rule
-      condition: event.payload.stage == "pre_apply"
+    - name: post plan status rule
+      condition: event.payload.stage == "post_plan"
       actions:
         - print_event:
            pretty: true
