@@ -9,8 +9,8 @@
         port: 5000
 
   rules:
-    - name: inbound webhook
-      condition: event.payload is defined
+    - name: pending status
+      condition: event.payload.notifications.run_status == "pending"
       action:
         debug:
-          var: event
+          msg: "TFC Run is in a pending state"
