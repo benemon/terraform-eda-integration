@@ -5,6 +5,7 @@
   - name: see extra_vars
     ansible.builtin.debug:
       msg: 
+      - "{{ ansible_eda.event }}"
       - "{{ access_token }}"
       - "{{ task_result_callback_url }}"
 
