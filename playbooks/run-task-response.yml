@@ -2,9 +2,15 @@
 - hosts: all
   gather_facts: false
   tasks:
-  - name: see extra_vars
+  - name: set facts from event data
+    ansible.builtin.set_fact:
+      access_token: "{{ ansible_eda.event.payload.access_token }}"
+      task_result_callback_url: "{{ ansible_eda.event.task_result_callback_url }}"
+
+  - name: output callback details
     ansible.builtin.debug:
       msg: 
-      - "{{ ansible_eda.event }}"
+      - "{{ access_token }}"
+      - "{{ task_result_callback_url }}"
 
 
