@@ -1,5 +1,5 @@
 ---
-- name: listen for tfc events
+- name: listen for tfc notification events
   hosts: all
 
   sources:
