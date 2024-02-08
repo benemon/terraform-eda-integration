@@ -11,8 +11,8 @@
        - ansible.eda.normalize_keys:
 
   rules:
-    - name: here is my specific rule match for a particular message
-      condition: event.payload.organization_name is defined
+    - name: inbound webhook
+      condition: event.payload is defined
       action:
         debug:
-          msg: "TFC says hello!"
+          var: event
