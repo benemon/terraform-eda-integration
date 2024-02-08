@@ -7,8 +7,7 @@
       ansible.eda.webhook:
         host: 0.0.0.0
         port: 5000
-        hmac_secret: "{{ hmac }}"
-        
+
   rules:
     - name: pre-apply status rule
       condition: event.payload.stage == "pre_apply"
