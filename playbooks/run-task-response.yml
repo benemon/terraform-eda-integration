@@ -26,7 +26,6 @@
           attributes:
             status: passed
             message: successfully called aap job based on eda event from a run task
-            url: "{{ awx_job_id }}"
 
 
 
