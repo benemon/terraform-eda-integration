@@ -20,6 +20,7 @@
       headers:
         Content-Type: application/vnd.api+json
         Authorization: "Bearer {{ access_token }}"
+      body_format: json
       body:
         data:
           type: task-results
