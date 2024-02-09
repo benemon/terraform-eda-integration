@@ -7,7 +7,7 @@
         host: 0.0.0.0
         port: 5000
         # need a custom de with certs baked in for this to work
-        certfile: /opt/tls/custom/cert.pem
+        certfile: /opt/tls/custom/fullchain.pem
         keyfile: /opt/tls/custom/key.pem
 
   rules:
