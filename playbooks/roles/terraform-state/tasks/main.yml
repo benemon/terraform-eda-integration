@@ -12,9 +12,9 @@
   ansible.builtin.debug:
     msg: "{{ current_state.json | to_nice_json }}"
 
-- name: get state outputs for state version
+- name: get state outputs for state version {{ current_state.json.data.id  }}
   ansible.builtin.uri:
-    url: "{{ hostname }}/api/v2/state-versions/{{ current_state.data.id }}/outputs"
+    url: "{{ hostname }}/api/v2/state-versions/{{ current_state.json.data.id }}/outputs"
     headers:
       Content-Type: application/vnd.api+json
       Authorization: "Bearer {{ tfc_user_token }}"
