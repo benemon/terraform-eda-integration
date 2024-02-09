@@ -1,4 +1,4 @@
-# Terraform EDA Integration with Ansible
+# Terraform Cloud Integration with Event Driven Ansible
 
 ## Overview
 
