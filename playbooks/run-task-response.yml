@@ -2,27 +2,32 @@
 - hosts: all
   gather_facts: false
   tasks:
-  - name: output callback details
-    ansible.builtin.debug:
-      msg: 
-      - "{{ access_token }}"
-      - "{{ task_result_callback_url }}"
+  - name: run task activities
+    block:
+    - name: output callback details
+      ansible.builtin.debug:
+        msg: 
+        - "{{ access_token }}"
+        - "{{ task_result_callback_url }}"
 
-  - name: send run task response
-    ansible.builtin.uri:
-      url: "{{ task_result_callback_url }}"
-      method: PATCH
-      headers:
-        Content-Type: application/vnd.api+json
-        Authorization: "Bearer {{ access_token }}"
-      body_format: json
-      body:
-        data:
-          type: task-results
-          attributes:
-            status: passed
-            message: successfully called aap job based on eda event from a run task
-            url: "https://aap.onmi.cloud:8443/#/jobs/playbook/{{ awx_job_id }}/output"
+    - name: set passed status fact
+      ansible.builtin.set_fact: 
+        - status: "failed"
+        - message: "run task completed succesfully"
+      notify: send run task response
+
+    rescue:
+      - name: make sure handlers run
+        meta: flush_handlers
+
+      - name: set failed status fact
+        ansible.builtin.set_fact: 
+          - status: "failed"
+          - message: "run task execution encountered a problem. check Ansible Automation Platform logs for details"
+  - handlers:
+    - ansible.builtin.import_tasks: handlers/run-task-response-handler.yml
+      
+    
 
 
 

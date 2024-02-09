@@ -1,0 +1,16 @@
+---
+- name: send run task response
+  ansible.builtin.uri:
+    url: "{{ task_result_callback_url }}"
+    method: PATCH
+    headers:
+      Content-Type: application/vnd.api+json
+      Authorization: "Bearer {{ access_token }}"
+    body_format: json
+    body:
+      data:
+        type: task-results
+        attributes:
+          status: "{{ status }}"
+          message: "{{ message }}"
+          url: "https://aap.onmi.cloud:8443/#/jobs/playbook/{{ awx_job_id }}/output"

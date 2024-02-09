@@ -8,13 +8,13 @@
         port: 5000
 
   rules:
-    - name: post plan status rule
-      condition: event.payload.stage == "post_plan"
+    - name: post apply status rule
+      condition: event.payload.stage == "post_apply"
       actions:
         - print_event:
            pretty: true
         - run_job_template:
-            name: Post Plan Run Task
+            name: Post Apply Run Task
             organization: Default
             job_args:
               extra_vars:
