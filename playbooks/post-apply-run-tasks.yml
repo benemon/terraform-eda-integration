@@ -1,15 +1,11 @@
 ---
-- hosts: all
-  gather_facts: false
-  tasks:
-  - name: include terraform state role
-    ansible.builtin.include_role:
-      name: terraform-state
-      apply:
-        delegate_to: localhost
-        run_once: true
+- hosts: localhost
+  connection: local
+  gather_facts: true
+  roles:
+  - role: terraform-state
 
-- hosts: "{{ public_dns }}"
+- hosts: "{{ hostvars['localhost']['public_dns'] }}"
   gather_facts: true
   tasks:
     - name: include tasks to execute against target hosts
@@ -22,15 +18,12 @@
           ansible.builtin.set_fact:
             status: failed
             message: ansible eda post plan run task encountered and issue. check the controller logs for details
-
-- hosts: all
-  gather_facts: false
-  tasks:
-  - name: include run task response role
-    ansible.builtin.include_role:
-      name: terraform-state
-      apply:
-        delegate_to: localhost
-        run_once: true
+        
+- hosts: localhost
+  connection: local
+  gather_facts: true
+  roles:
+  - role: run-task-response
     vars:
       status: "{{ status | default('passed') }}"
+      message: "{{ message | default('ansible eda post plan run task completed succesfully') }}"
