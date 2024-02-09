@@ -5,7 +5,7 @@
     url: "{{ hostname }}/api/v2/workspaces/{{ workspace }}/current-state-version"
     headers:
       Content-Type: application/vnd.api+json
-      Authorization: "Bearer {{ access_token }}"
+      Authorization: "Bearer {{ tfc_user_token }}"
   register: current_state
 
 - name: get state outputs for state version {{ current_state.data.id }}
@@ -13,7 +13,7 @@
     url: "{{ hostname }}/api/v2/state-versions/{{ current_state.data.id }}/outputs"
     headers:
       Content-Type: application/vnd.api+json
-      Authorization: "Bearer {{ access_token }}"
+      Authorization: "Bearer {{ tfc_user_token }}"
   register: current_state_outputs
 
 - name: set each key/value pair as a separate fact
