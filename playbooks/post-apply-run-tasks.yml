@@ -1,18 +1,28 @@
 ---
 - hosts: localhost
   connection: local
-  gather_facts: false
+  gather_facts: true
   roles:
   - role: terraform-state
 
 - hosts: "{{ public_dns }}"
   gather_facts: true
-  roles:
-    - role: mock-vm-setup
+  tasks:
+    block:    
+      - name: include tasks to execute against target hosts
+        ansible.builtin.include_roles:
+          name: mock-vm-setup
+    rescue:
+      - name: include tasks to execute against target hosts
+        ansible.builtin.include_roles:
+          name: run-task-response
+        vars:
+          status: failed
+          message: ansible eda post plan run task encountered a problem
 
 - hosts: localhost
   connection: local
-  gather_facts: false
+  gather_facts: true
   roles:
   - role: run-task-response
     vars:
