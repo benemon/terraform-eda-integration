@@ -5,7 +5,7 @@
   roles:
   - role: terraform-state
 
-- hosts: "{{ public_dns }}"
+- hosts: "{{ public_dns | default('localhost') }}"
   gather_facts: true
   roles:
     - role: mock-vm-setup
