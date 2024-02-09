@@ -10,7 +10,7 @@
 
 - name: show state outputs
   ansible.builtin.debug:
-    msg: "{{ current_state | to_nice_json }}"
+    msg: "{{ current_state.json | to_nice_json }}"
 
 - name: get state outputs for state version
   ansible.builtin.uri:
