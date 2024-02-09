@@ -24,16 +24,11 @@
   ansible.builtin.set_fact:
     state_output_keys: []
 
-- name: set each key/value pair as a separate fact and accumulate keys
+- name: set each key/value pair as a separate fact
+  ansible.builtin.set_fact:
+    "{{ item.attributes.name }}": "{{ item.attributes.value }}"
+    state_output_keys: "{{ state_output_keys + [item.attributes.name] }}"
   loop: "{{ current_state_outputs.json.data }}"
-  block:
-    - name: Set the fact for the current item
-      ansible.builtin.set_fact:
-        "{{ item.attributes.name }}": "{{ item.attributes.value }}"
-    
-    - name: accumulate key names
-      ansible.builtin.set_fact:
-        state_output_keys: "{{ state_output_keys + [item.attributes.name] }}"
 
 - name: show state outputs
   ansible.builtin.debug:
