@@ -9,7 +9,7 @@
   gather_facts: true
   roles:
     - role: mock-vm-setup
-  when: public_dns is defined
+      when: public_dns is defined
 
 - hosts: localhost
   connection: local
