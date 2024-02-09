@@ -14,11 +14,12 @@
       ansible.builtin.set_fact: 
         status: "passed"
         message: "run task completed succesfully"
+      changed_when: true
       notify: send run task response
     rescue:
       - name: make sure handlers run
         meta: flush_handlers
-        
+
       - name: set failed status fact
         ansible.builtin.set_fact: 
           status: "failed"
