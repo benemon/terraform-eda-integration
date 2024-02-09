@@ -8,7 +8,11 @@
       Authorization: "Bearer {{ tfc_user_token }}"
   register: current_state
 
-- name: get state outputs for state version {{ current_state.data.id }}
+- name: show state outputs
+  ansible.builtin.debug:
+    msg: "{{ current_state | to_nice_json }}"
+
+- name: get state outputs for state version
   ansible.builtin.uri:
     url: "{{ hostname }}/api/v2/state-versions/{{ current_state.data.id }}/outputs"
     headers:
