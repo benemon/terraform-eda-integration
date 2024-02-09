@@ -9,8 +9,8 @@
       connection: local
   - role: run-task-response
     vars:
-      status: passed
-      message: ansible eda post plan run task completed succesfully
+      run_task_status: passed
+      run_task_message: ansible eda post plan run task completed succesfully
       
     
 
