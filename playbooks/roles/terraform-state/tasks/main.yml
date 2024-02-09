@@ -30,3 +30,4 @@
   ansible.builtin.debug:
     msg: "{{ item }} : {{ lookup('vars', item) }}"
   loop: "{{ state_output_keys }}"
+  when: state_output_keys is defined
