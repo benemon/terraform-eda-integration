@@ -5,7 +5,7 @@
     - name: tfc run task webhook
       ansible.eda.webhook:
         host: 0.0.0.0
-        port: "{{ port }}"
+        port: 5000
         # need a custom de with certs baked in for this to work
         certfile: /opt/tls/custom/fullchain.pem
         keyfile: /opt/tls/custom/key.pem
