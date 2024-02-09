@@ -2,11 +2,6 @@
 - hosts: all
   gather_facts: false
   tasks:
-  - name: set facts from event data
-    ansible.builtin.set_fact:
-      access_token: "{{ ansible_eda.event.payload.access_token }}"
-      task_result_callback_url: "{{ ansible_eda.event.payload.task_result_callback_url }}"
-
   - name: output callback details
     ansible.builtin.debug:
       msg: 
@@ -27,6 +22,7 @@
           attributes:
             status: passed
             message: successfully called aap job based on eda event from a run task
+            url: "https://aap.onmi.cloud/#/jobs/playbook/{{ awx_job_id }}/output"
 
 
 

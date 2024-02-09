@@ -6,7 +6,7 @@
       ansible.eda.webhook:
         host: 0.0.0.0
         port: 5000
-        
+
   rules:
     - name: post plan status rule
       condition: event.payload.stage == "post_plan"
@@ -18,4 +18,8 @@
             organization: Default
             job_args:
               extra_vars:
+                access_token: "{{ event.payload.access_token }}"
+                task_result_callback_url: "{{ event.payload.task_result_callback_url }}"
+
+
               
