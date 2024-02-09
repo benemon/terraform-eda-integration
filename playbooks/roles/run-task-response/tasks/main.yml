@@ -12,6 +12,6 @@
       data:
         type: task-results
         attributes:
-          status: "{{ status }}"
-          message: "{{ message }}"
+          status: "{{ run_task_status }}"
+          message: "{{ run_task_message }}"
           url: "https://aap.onmi.cloud:8443/#/jobs/playbook/{{ awx_job_id }}/output"
