@@ -22,8 +22,8 @@
 
       - name: set failed status fact
         ansible.builtin.set_fact: 
-          - status: "failed"
-          - message: "run task execution encountered a problem. check Ansible Automation Platform logs for details"
+          status: "failed"
+          message: "run task execution encountered a problem. check Ansible Automation Platform logs for details"
   - handlers:
     - ansible.builtin.import_tasks: handlers/run-task-response-handler.yml
       
