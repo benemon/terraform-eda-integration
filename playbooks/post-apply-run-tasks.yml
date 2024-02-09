@@ -16,8 +16,8 @@
       rescue:
         - name: set status and message
           ansible.builtin.set_fact:
-            run_task_status: failed
-            run_task_message: ansible eda post plan run task encountered and issue. check the controller logs for details
+            completed_run_task_status: failed
+            completed_run_task_message: ansible eda post plan run task encountered and issue. check the controller logs for details
         
 - hosts: localhost
   connection: local
@@ -25,5 +25,5 @@
   roles:
   - role: run-task-response
     vars:
-      run_task_status: "{{ run_task_status | default('passed') }}"
-      run_task_message: "{{ run_task_message | default('ansible eda post plan run task completed succesfully') }}"
+      run_task_status: "{{ completed_run_task_status | default('passed') }}"
+      run_task_message: "{{ completed_run_task_message | default('ansible eda post plan run task completed succesfully') }}"
