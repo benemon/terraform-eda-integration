@@ -2,7 +2,7 @@
 - hosts: all
   gather_facts: false
   tasks:
-  - name: run task activities
+  - name: post apply run tasks
     block:
     - name: output callback details
       ansible.builtin.debug:
@@ -14,6 +14,7 @@
       ansible.builtin.set_fact: 
         status: "passed"
         message: "run task completed succesfully"
+      # force a change when we get to this block.
       changed_when: true
       notify: send run task response
     rescue:
