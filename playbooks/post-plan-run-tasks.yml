@@ -4,9 +4,6 @@
   gather_facts: false
   roles:
   - role: terraform-state
-    delegate_to: localhost
-    vars:
-      connection: local
   - role: run-task-response
     vars:
       run_task_status: passed
