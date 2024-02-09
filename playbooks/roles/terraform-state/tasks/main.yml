@@ -24,7 +24,7 @@
   ansible.builtin.set_fact:
     "{{ item.attributes.name }}": "{{ item.attributes.value }}"
     state_output_keys: "{{ fact_names | default([]) + [item.attributes.name] }}"
-  loop: "{{ current_state_outputs.data }}"
+  loop: "{{ current_state_outputs.json.data }}"
 
 - name: show state outputs
   ansible.builtin.debug:
