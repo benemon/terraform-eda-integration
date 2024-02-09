@@ -6,7 +6,6 @@
     headers:
       Content-Type: application/vnd.api+json
       Authorization: "Bearer {{ access_token }}"
-    body_format: json
   register: current_state
 
 - name: get state outputs for state version {{ current_state.data.id }}
@@ -15,7 +14,6 @@
     headers:
       Content-Type: application/vnd.api+json
       Authorization: "Bearer {{ access_token }}"
-    body_format: json
   register: current_state_outputs
 
 - name: set each key/value pair as a separate fact
