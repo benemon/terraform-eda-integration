@@ -9,6 +9,7 @@
         hmac_secret: "{{ hmac }}"
         hmac_algo: sha256
         hmac_header: "X-Tfc-Task-Signature"
+        hmac_format: base64
 
   rules:
     - name: post plan status rule
