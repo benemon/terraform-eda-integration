@@ -12,8 +12,8 @@
 
     - name: set passed status fact
       ansible.builtin.set_fact: 
-        - status: "passed"
-        - message: "run task completed succesfully"
+        status: "passed"
+        message: "run task completed succesfully"
       notify: send run task response
 
     rescue:
