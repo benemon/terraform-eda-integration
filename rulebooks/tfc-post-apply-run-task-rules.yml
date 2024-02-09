@@ -1,6 +1,6 @@
 ---
 - name: listen for tfc post apply run task events
-  hosts: localhost
+  hosts: all
   sources:
     - name: tfc run task webhook
       ansible.eda.webhook:
@@ -15,21 +15,11 @@
       actions:
         - print_event:
            pretty: true
-        - run_module:
-            ansible.builtin.uri:
-            module_args:
-              url: "https://app.terraform.io/api/v2/workspaces/{{ event.payload.workspace_id }}/current-state-version"
-              headers:
-                Content-Type: application/vnd.api+json
-                Authorization: "Bearer {{ event.payload.access_token }}"
-              body_format: json
-            set_facts: true
-        - debug:
-        # - run_job_template:
-        #     name: Post Apply Run Task
-        #     organization: Default
-        #     job_args:
-        #       extra_vars:
-        #         access_token: "{{ event.payload.access_token }}"
-        #         task_result_callback_url: "{{ event.payload.task_result_callback_url }}"
-        #         workspace: "{{ event.payload.workspace_id }}"
+        - run_job_template:
+            name: Post Apply Run Task
+            organization: Default
+            job_args:
+              extra_vars:
+                access_token: "{{ event.payload.access_token }}"
+                task_result_callback_url: "{{ event.payload.task_result_callback_url }}"
+                workspace: "{{ event.payload.workspace_id }}"
