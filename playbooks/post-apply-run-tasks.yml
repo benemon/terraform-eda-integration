@@ -3,9 +3,10 @@
   gather_facts: true
   tasks:
   - name: include terraform state role
-    ansible.builtin.include_role:
+    ansible.builtin.import_role:
       name: terraform-state
     delegate_to: localhost
+    run_once: true
 
 - hosts: "{{ public_dns }}"
   gather_facts: true
@@ -25,9 +26,10 @@
   gather_facts: true
   tasks:
   - name: include terraform state role
-    ansible.builtin.include_role:
+    ansible.builtin.import_role:
       name: terraform-state
       vars:
         status: "{{ status | default('passed') }}"
         message: "{{ message | default('ansible eda post plan run task completed succesfully') }}"
     delegate_to: localhost
+    run_once: true
