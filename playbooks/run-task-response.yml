@@ -22,7 +22,7 @@
           attributes:
             status: passed
             message: successfully called aap job based on eda event from a run task
-            url: "https://aap.onmi.cloud/#/jobs/playbook/{{ awx_job_id }}/output"
+            url: "https://aap.onmi.cloud:8443/#/jobs/playbook/{{ awx_job_id }}/output"
 
 
 
