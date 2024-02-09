@@ -15,16 +15,15 @@
         status: "passed"
         message: "run task completed succesfully"
       notify: send run task response
-
     rescue:
       - name: make sure handlers run
         meta: flush_handlers
-
+        
       - name: set failed status fact
         ansible.builtin.set_fact: 
           status: "failed"
           message: "run task execution encountered a problem. check Ansible Automation Platform logs for details"
-  - handlers:
+  handlers:
     - ansible.builtin.import_tasks: handlers/run-task-response-handler.yml
       
     
