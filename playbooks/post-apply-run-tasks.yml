@@ -26,11 +26,11 @@
 - hosts: all
   gather_facts: true
   tasks:
-  - name: include terraform state role
+  - name: include run task response role
     ansible.builtin.include_role:
       name: terraform-state
-      vars:
-        status: "{{ status | default('passed') }}"
       apply:
         delegate_to: localhost
         run_once: true
+    vars:
+      status: "{{ status | default('passed') }}"
