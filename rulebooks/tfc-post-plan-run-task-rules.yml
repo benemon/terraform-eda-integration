@@ -1,5 +1,5 @@
 ---
-- name: listen for tfc pre apply run task events
+- name: listen for tfc post plan run task events
   hosts: all
   sources:
     - name: tfc run task webhook
