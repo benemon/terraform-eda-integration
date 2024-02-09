@@ -20,11 +20,20 @@
       Authorization: "Bearer {{ tfc_user_token }}"
   register: current_state_outputs
 
-- name: set each key/value pair as a separate fact
+- name: initialize state_output_keys
   ansible.builtin.set_fact:
-    "{{ item.attributes.name }}": "{{ item.attributes.value }}"
-    state_output_keys: "{{ fact_names | default([]) + [item.attributes.name] }}"
+    state_output_keys: []
+
+- name: set each key/value pair as a separate fact and accumulate keys
   loop: "{{ current_state_outputs.json.data }}"
+  block:
+    - name: Set the fact for the current item
+      ansible.builtin.set_fact:
+        "{{ item.attributes.name }}": "{{ item.attributes.value }}"
+    
+    - name: accumulate key names
+      ansible.builtin.set_fact:
+        state_output_keys: "{{ state_output_keys + [item.attributes.name] }}"
 
 - name: show state outputs
   ansible.builtin.debug:
