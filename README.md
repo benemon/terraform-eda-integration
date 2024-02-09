@@ -1,12 +1,12 @@
-# Terraform EDA Integration with Ansible
+# Terraform Cloud Integration with Event Driven Ansible
 
 ## Overview
 
-This repository contains Ansible artifacts designed to facilitate the integration of Terraform with Event-Driven Architecture (EDA) solutions. It includes a collection of Ansible playbooks, roles, and potentially rulebooks, each tailored to automate and streamline the deployment and management of EDA components using Terraform.
+This repository contains Ansible artifacts designed to facilitate the integration of Terraform Cloud with Event-Driven Ansible. It includes a collection of Ansible playbooks, roles, and rulebooks to setup the integration, and carry out mock tasks on a host created using Terraform Cloud.
 
 ## Prerequisites
 
-Before using this repository, ensure you have the following installed and configured on your system:
+Before using this repository, ensure you have the following installed and configured:
 
 - Ansible Automation Platform (2.4 or later)
 - Terraform Cloud
