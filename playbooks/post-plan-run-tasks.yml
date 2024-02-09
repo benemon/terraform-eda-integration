@@ -1,8 +1,12 @@
 ---
-- hosts: all
+- hosts: localhost
+  connection: local
   gather_facts: false
   roles:
   - role: terraform-state
+    delegate_to: localhost
+    vars:
+      connection: local
   - role: run-task-response
     vars:
       status: passed
