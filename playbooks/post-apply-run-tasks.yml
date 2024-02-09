@@ -11,7 +11,7 @@
     - name: include tasks to execute against target hosts
       block:    
         - name: include mock-vm-setup role
-          ansible.builtin.include_roles:
+          ansible.builtin.include_role:
             name: mock-vm-setup
       rescue:
         - name: set status and message
