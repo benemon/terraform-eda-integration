@@ -9,6 +9,30 @@
         msg: 
         - "{{ access_token }}"
         - "{{ task_result_callback_url }}"
+        - "{{ workspace }}"
+
+    - name: get state version for workspace {{ workspace }}
+      ansible.builtin.uri:
+        url: "https://app.terraform.io/api/v2/workspaces/{{ workspace }}/current-state-version"
+      headers:
+        Content-Type: application/vnd.api+json
+        Authorization: "Bearer {{ access_token }}"
+      body_format: json
+      register: current_state
+
+
+    - name: get state outputs for state version {{ current_state.data.id }}
+      ansible.builtin.uri:
+        url: "https://app.terraform.io/api/v2/state-versions/{{ current_state.data.id }}/outputs"
+      headers:
+        Content-Type: application/vnd.api+json
+        Authorization: "Bearer {{ access_token }}"
+      body_format: json
+      register: state_outputs
+
+    - name: show state outputs
+      ansible.builtin.debug:
+        msg: "{{ state_outputs | to_nice_json }}"
 
     - name: set passed status fact
       ansible.builtin.set_fact: 
