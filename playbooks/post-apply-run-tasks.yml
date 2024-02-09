@@ -1,58 +1,20 @@
 ---
-- hosts: all
+- hosts: localhost
+  connection: local
   gather_facts: false
-  tasks:
-  - name: post apply run tasks
-    block:
-    - name: output callback details
-      ansible.builtin.debug:
-        msg: 
-        - "{{ access_token }}"
-        - "{{ task_result_callback_url }}"
-        - "{{ workspace }}"
+  roles:
+  - role: terraform-state
 
-    - name: get state version for workspace {{ workspace }}
-      ansible.builtin.uri:
-        url: "https://app.terraform.io/api/v2/workspaces/{{ workspace }}/current-state-version"
-      headers:
-        Content-Type: application/vnd.api+json
-        Authorization: "Bearer {{ access_token }}"
-      body_format: json
-      register: current_state
+- hosts: "{{ public_dns }}"
+  gather_facts: true
+  roles:
+    - role: mock-vm-setup
 
-
-    - name: get state outputs for state version {{ current_state.data.id }}
-      ansible.builtin.uri:
-        url: "https://app.terraform.io/api/v2/state-versions/{{ current_state.data.id }}/outputs"
-      headers:
-        Content-Type: application/vnd.api+json
-        Authorization: "Bearer {{ access_token }}"
-      body_format: json
-      register: state_outputs
-
-    - name: show state outputs
-      ansible.builtin.debug:
-        msg: "{{ state_outputs | to_nice_json }}"
-
-    - name: set passed status fact
-      ansible.builtin.set_fact: 
-        status: "passed"
-        message: "run task completed succesfully"
-      # force a change when we get to this block.
-      changed_when: true
-      notify: send run task response
-    rescue:
-      - name: make sure handlers run
-        meta: flush_handlers
-
-      - name: set failed status fact
-        ansible.builtin.set_fact: 
-          status: "failed"
-          message: "run task execution encountered a problem. check Ansible Automation Platform logs for details"
-  handlers:
-    - ansible.builtin.import_tasks: handlers/run-task-response-handler.yml
-      
-    
-
-
-
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  roles:
+  - role: run-task-response
+    vars:
+      status: passed
+      message: ansible eda post plan run task completed succesfully

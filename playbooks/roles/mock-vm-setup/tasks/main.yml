@@ -1,0 +1,6 @@
+---
+# tasks file for mock-vm-setup
+- name: mock task to execute on a target host
+  ansible.builtin.debug:
+    msg: "hello from {{ ansible_host }}"
+  

@@ -1,0 +1,3 @@
+---
+# defaults file for terraform-state
+hostname: https://app.terraform.io

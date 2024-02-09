@@ -1,0 +1,4 @@
+---
+# defaults file for run-task-response
+status: failed
+message: default message from run task
