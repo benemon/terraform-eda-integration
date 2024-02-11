@@ -29,5 +29,5 @@
   roles:
   - role: run-task-response
     vars:
-      run_task_status: "{{ completed_run_task_status | default('passed') }}"
-      run_task_message: "{{ completed_run_task_message | default('ansible eda post plan run task completed succesfully') }}"
+      run_task_status: "{{ hostvars[public_dns]['completed_run_task_status'] | default('passed') }}"
+      run_task_message: "{{ hostvars[public_dns]['completed_run_task_message'] | default('ansible eda post plan run task completed succesfully') }}"
