@@ -13,6 +13,10 @@
         - name: include mock-vm-setup role
           ansible.builtin.include_role:
             name: mock-vm-setup
+
+        - name: Force a failure
+          ansible.builtin.command: /bin/false
+
       rescue:
         - name: set status and message
           ansible.builtin.set_fact:
