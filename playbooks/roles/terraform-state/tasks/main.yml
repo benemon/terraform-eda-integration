@@ -28,6 +28,7 @@
   ansible.builtin.set_fact:
     "{{ item.attributes.name }}": "{{ item.attributes.value }}"
     state_output_keys: "{{ state_output_keys + [item.attributes.name] }}"
+  cacheable: true
   loop: "{{ current_state_outputs.json.data }}"
 
 - name: show state outputs
