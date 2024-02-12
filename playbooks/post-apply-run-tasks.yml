@@ -17,13 +17,13 @@
           ansible.builtin.set_fact:
             completed_run_task_status: passed
             completed_run_task_message: ansible eda post plan run task completed succesfully
-          cacheable: true
+            cacheable: true
       rescue:
         - name: set failure status and message
           ansible.builtin.set_fact:
             completed_run_task_status: failed
             completed_run_task_message: ansible eda post plan run task encountered and issue. check the controller logs for details
-          cacheable: true
+            cacheable: true
         
 - hosts: localhost
   connection: local
