@@ -5,7 +5,7 @@
   roles:
   - role: terraform-state
 
-- hosts: "{{ public_dns | default('host_does_not_exist')}}"
+- hosts: "{{ hostvars['localhost']['public_dns'] | default('host_does_not_exist')}}"
   gather_facts: true
   tasks:
     - name: include tasks to execute against target hosts
@@ -17,13 +17,11 @@
           ansible.builtin.set_fact:
             completed_run_task_status: passed
             completed_run_task_message: ansible eda post plan run task completed succesfully
-            cacheable: true
       rescue:
         - name: set failure status and message
           ansible.builtin.set_fact:
             completed_run_task_status: failed
             completed_run_task_message: ansible eda post plan run task encountered and issue. check the controller logs for details
-            cacheable: true
         
 - hosts: localhost
   connection: local
@@ -31,8 +29,8 @@
   roles:
   - role: run-task-response
     vars:
-      run_task_status: "{{ completed_run_task_status }}"
-      run_task_message: "{{ completed_run_task_message }}"
+      run_task_status: "{{ hostvars[public_dns]['completed_run_task_status']  }}"
+      run_task_message: "{{ hostvars[public_dns]['completed_run_task_message'] }}"
     when: public_dns is defined
   - role: run-task-response
     vars:
